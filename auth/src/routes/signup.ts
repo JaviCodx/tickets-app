@@ -15,9 +15,9 @@ router.post(
   (req: Request, res: Response) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).send(errors.array())
+      throw new Error('Invalid email or password')
     }
-    const { email, password } = req.body
+    const { email, password }: { email: string; password: string } = req.body
 
     console.log('Creating', email, password)
     res.send({})
