@@ -2,6 +2,8 @@
 
 TO-DO
 
-Architecture: asyncronous event-base microservices
-Language: Typescript
-Techs: Express,MongoDB,React,Docker,Kubernetes
+-Architecture: asyncronous event-base microservices
+
+-Language: Typescript
+
+-Tech: Express,MongoDB,React,Docker,Kubernetes
