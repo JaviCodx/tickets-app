@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express'
+import jwt from 'jsonwebtoken'
 import { body, validationResult } from 'express-validator'
 import { RequestValidationError } from '../errors/request-validation-error'
 import { User } from '../models/user'
@@ -29,6 +30,17 @@ router.post(
     }
     const newUser = User.build({ email, password })
     await newUser.save()
+
+    //Generate jwt token
+    const userJwt = jwt.sign(
+      { id: newUser.id, email: newUser.email },
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      process.env.JWT_KEY!
+    )
+
+    //Store in cookieSession
+    req.session = { jwt: userJwt }
+
     res.status(201).send(newUser)
   }
 )
