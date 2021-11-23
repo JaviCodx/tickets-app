@@ -16,3 +16,11 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: javicodx/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.tsx"
+            dest: . 
