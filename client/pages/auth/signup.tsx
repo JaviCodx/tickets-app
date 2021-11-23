@@ -1,7 +1,9 @@
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import { useState } from 'react';
 
 const Signup = () => {
+  const [email, setEmail] = useState('');
   return (
     <>
       <Box
@@ -12,7 +14,12 @@ const Signup = () => {
         noValidate
         autoComplete="off"
       >
-        <TextField required id="outlined-required" label="Required" />
+        <TextField
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          id="outlined-required"
+          label="Required"
+        />
       </Box>
     </>
   );
