@@ -20,13 +20,13 @@ const Signup = () => {
 
   const handleSubmit = async (e: React.SyntheticEvent): Promise<any> => {
     e.preventDefault();
-    console.log(email, password);
+
     try {
       const res = await axios.post('/api/users/signup', {
         email,
         password,
       });
-      console.log(res.data);
+
       setEmail('');
       setPassword('');
     } catch (err) {
