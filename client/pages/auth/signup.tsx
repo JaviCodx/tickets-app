@@ -1,5 +1,6 @@
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import Alert from '@mui/material/Alert';
 
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
@@ -7,7 +8,7 @@ import Button from '@mui/material/Button';
 import { useState } from 'react';
 import axios from 'axios';
 
-interface apiError {
+interface Error {
   message: string;
   fields?: string[];
 }
@@ -15,7 +16,7 @@ interface apiError {
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState<Error[]>([]);
 
   const handleSubmit = async (e: React.SyntheticEvent): Promise<any> => {
     e.preventDefault();
@@ -61,6 +62,19 @@ const Signup = () => {
               fullWidth
               margin="normal"
             />
+          </Grid>
+          <Grid item>
+            {errors.length > 0 && (
+              <Alert severity="error" sx={{ my: 2 }}>
+                {
+                  <ul>
+                    {errors.map((err) => (
+                      <li key={err.message}>{err.message}</li>
+                    ))}
+                  </ul>
+                }
+              </Alert>
+            )}
           </Grid>
           <Grid item>
             <Button type="submit" variant="contained">
