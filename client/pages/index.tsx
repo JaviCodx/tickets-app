@@ -2,46 +2,31 @@ import type { NextPage, GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import axios from 'axios';
+import buildClient from '../api/buildClient';
 
+type CurrentUser = null | { id: string; email: string };
 interface CurrentUserResponse {
-  data: { currentUser: null };
+  data: { currentUser: CurrentUser };
 }
 
 interface Props {
-  currentUser?: null | {};
+  currentUser: CurrentUser;
 }
 
 const Home: NextPage<Props> = ({ currentUser }) => {
-  console.log(currentUser);
-  return <div>Helloo World</div>;
+  return currentUser ? (
+    <h1>You are signed in</h1>
+  ) : (
+    <h1>You are NOT signed in</h1>
+  );
 };
 
-Home.getInitialProps = async () => {
-  if (typeof window === 'undefined') {
-    const response = await axios
-      .get(
-        'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/users/currentuser',
-        {
-          headers: {
-            Host: 'tickets-app.dev',
-          },
-        }
-      )
-      .catch((err) => console.log(err.message));
+Home.getInitialProps = async (context) => {
+  const { data } = (await buildClient(context).get(
+    '/api/users/currentuser'
+  )) as CurrentUserResponse;
 
-    const { data } = response as CurrentUserResponse;
-
-    return data;
-  } else {
-    const response = await axios
-      .get('/api/users/currentuser')
-      .catch((err) => console.log(err));
-
-    const { data } = response as CurrentUserResponse;
-
-    return data;
-  }
+  return data;
 };
 
 export default Home;
