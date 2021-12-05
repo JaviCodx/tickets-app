@@ -34,7 +34,7 @@ const MyApp = (props: MyAppProps) => {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Layout>
+        <Layout currentUser={currentUser}>
           <Component {...pageProps} />
         </Layout>
       </ThemeProvider>
