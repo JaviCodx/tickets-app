@@ -2,8 +2,7 @@ import express, { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import { body } from 'express-validator'
 import { User } from '../models/user'
-import { validateRequest } from '../middlewares/validate-request'
-import { BadRequestError } from '../errors/bad-request-error'
+import { BadRequestError, validateRequest } from '@jcodx/tickets-common'
 import { Password } from '../services/password'
 
 const router = express.Router()

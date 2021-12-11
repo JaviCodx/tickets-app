@@ -13,7 +13,6 @@ export class Password {
     const [hashedPassword, salt] = storedPassword.split('.')
     const buffer = (await scryptAsync(suppliedPassword, salt, 64)) as Buffer
 
- 
     return buffer.toString('hex') === hashedPassword
   }
 }
