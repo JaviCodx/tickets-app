@@ -4,6 +4,7 @@ import cookieSession from 'cookie-session'
 import { errorHandler, NotFoundError, currentUser } from '@jcodx/tickets-common'
 import { createTicketRouter } from './routes/new'
 import { showTicketRouter } from './routes/show'
+import { indexTicketRouter } from './routes'
 
 const app = express()
 app.set('trust proxy', true)
@@ -15,6 +16,7 @@ app.use(
   })
 )
 app.use(currentUser)
+app.use(indexTicketRouter)
 app.use(showTicketRouter)
 
 app.use(createTicketRouter)

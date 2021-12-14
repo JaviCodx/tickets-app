@@ -24,9 +24,3 @@ it('200 on ticket found GET /api/tickets ', async () => {
   expect(ticketResponse.body.title).toEqual(ticket.title)
   expect(ticketResponse.body.price).toEqual(ticket.price)
 })
-it('404 on not found GET /api/tickets ', async () => {
-  return
-})
-it('404 on not found GET /api/tickets ', async () => {
-  return
-})
