@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express'
 import { NotFoundError } from '@jcodx/tickets-common'
-
 import { Ticket } from '../models/ticket'
 
 const router = express.Router()

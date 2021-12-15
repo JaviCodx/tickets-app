@@ -5,6 +5,7 @@ import { errorHandler, NotFoundError, currentUser } from '@jcodx/tickets-common'
 import { createTicketRouter } from './routes/new'
 import { showTicketRouter } from './routes/show'
 import { indexTicketRouter } from './routes'
+import { updateTicketRouter } from './routes/update'
 
 const app = express()
 app.set('trust proxy', true)
@@ -18,6 +19,7 @@ app.use(
 app.use(currentUser)
 app.use(indexTicketRouter)
 app.use(showTicketRouter)
+app.use(updateTicketRouter)
 
 app.use(createTicketRouter)
 
